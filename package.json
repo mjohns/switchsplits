@@ -4,6 +4,7 @@
 	"publisher": "mjohns",
 	"description": "Allows switching to between editors",
 	"version": "0.0.1",
+	"repository": "https://github.com/mjohns/switchsplits",
 	"engines": {
 		"vscode": "^1.55.0"
 	},
