@@ -3,7 +3,7 @@
 	"displayName": "SwitchSplits",
 	"publisher": "mjohns",
 	"description": "Allows switching to between editors",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"repository": "https://github.com/mjohns/switchsplits",
 	"engines": {
 		"vscode": "^1.55.0"
