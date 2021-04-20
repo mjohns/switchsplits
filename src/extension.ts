@@ -13,23 +13,24 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('switchsplits.switchEditor', () => {
 		// The code you place here will be executed every time your command is executed
 
-		let nextEditor = null;
-		for (const editor of vscode.window.visibleTextEditors) {
-			if (window.activeTextEditor !== editor) {
-				nextEditor = editor;
-				break;
-			}
+		let viewColumn: vscode.ViewColumn = vscode.ViewColumn.One;
+		if (window.activeTextEditor?.viewColumn === vscode.ViewColumn.One) {
+			viewColumn = vscode.ViewColumn.Two;
 		}
-		if (!nextEditor) {
+		let textEditors = vscode.window.visibleTextEditors.filter(editor => editor.viewColumn === viewColumn);
+		if (vscode.window.visibleTextEditors.length > 0) {
+			textEditors.push(vscode.window.visibleTextEditors[0]);
+		}
+		if (textEditors.length === 0) {
 			vscode.window.showInformationMessage('No editor to switch to');
 			return;
 		}
-
-		nextEditor.show(nextEditor.viewColumn);
+		const textEditor: vscode.TextEditor = textEditors[0];
+		window.showTextDocument(textEditor.document, textEditor.viewColumn);
 	});
 
 	context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
